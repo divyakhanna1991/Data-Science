@@ -1,0 +1,14 @@
+import pandas as pd
+
+# Read the CSV file into a DataFrame
+df = pd.read_csv("california_housing_train.csv")
+
+# Calculate the mean of each column in the original DataFrame
+print(df.mean())
+print("---------------------------")
+
+# Create a new DataFrame df2 by selecting rows 1 to 9 with a step of 2
+df2 = df.loc[1:9:2]
+
+# Calculate the mean of each column in the subset DataFrame df2
+print(df2.mean())
