@@ -1,0 +1,117 @@
+''' 1. Write python program to generate the following charts:
+a) User will enter the data in list
+b) Generate pie chart based upon the entered data
+c) Generate bar chart based upon the entered data '''
+
+import matplotlib.pyplot as plt
+listX =[]
+listY =[]
+n = int(input("Enter number of values you want to enter"))
+print("Enter x and y : ")
+for i in range(n):
+   x = int(input("X: "))
+   y = int(input("Y: "))
+   listX.append(x)
+   listY.append(y)
+
+# Pie chart
+plt.pie(listY, labels=listX)
+plt.legend(title="Pie chart")
+plt.show()
+
+# Bar chart
+plt.bar(listX,listY,width=0.5)
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('Bar Chart')
+plt.show()
+
+ '''2. Write python program to imports “sale.csv” file and do the following tasks:
+a) Data Analysis with Panda by displaying top and bottom 10 rows
+b) Calculate total sales by adding the data values mentioned in Sales attribute in the
+file.
+c) Find the mean Sales
+d) Group the Sales by Category
+e) Plot the Sales Product-wise
+f) Mention xlabel, ylabel and title to the plot'''
+
+import pandas as pd
+import matplotlib.pyplot as plt
+df = pd.read_csv("sales.csv")
+print("TOP 10 DATA ")
+print(df.head(10))
+
+print("\nBOTTOM 10 DATA ")
+print(df.tail(10))
+
+
+total = df['Units Sold'].sum()
+print("\n TOTAL SALES : ",total)
+
+mean = df['Units Sold'].mean()
+print("\n MEAN SALES : ",mean)
+
+group = df.groupby('Product')['Units Sold'].sum()
+print("GROUPING THE SALES BY CATEGORY")
+print(group)
+
+print("\n PLOTTING THE SALES PRODUCT-WISE")
+group.plot(kind = 'bar')
+plt.xlabel("Products")
+plt.ylabel("Sales")
+plt.title("Sales Product wise")
+plt.show()
+
+
+''' 3.How are NumPy arrays better than Python’s lists? Do the following task:
+a) insert column in the 2D array
+b) how array1[:,0] is different from array2[:,[0]]
+c) use argmax( ) function to get axis of maximum element of the array
+d) showcase the difference between argsort( ) and sort()
+e) How is np.mean() different from np.average() in NumPy?
+f) count the frequency of a given positive value appearing in the NumPy array
+
+g) inserting * between characters of all elements in a NumPy array. '''
+
+
+import numpy as np
+
+print(''' Numpy arrays are different from Python's list
+1. as they execute faster in comparsion
+2. Array is collection of homogeneous data while list can contain heterogeneous data
+3. Array is stored in contingous memory location while list is stored in non-contiguous memory locations.\n''')
+
+arr = np.array([[1,5,6],[5,12,15],[4,13,9]])
+arr2 = np.array([[3],[5],[14]])
+result = np.hstack((arr,arr2))
+print("Adding column")
+print(result)
+
+print("\narr[:,0] - selects entire first column as 1D array")
+print(arr[:,0])
+print("\narr[:,[0]] - selects entire first column as a 2D array")
+print(arr[:,[0]])
+
+axisMax = np.argmax(arr)
+print("Axis of max element : ", axisMax)
+
+print("\n agrsort() - returns the indices that would sort an array")
+arr1 = np.array([4,7,1,3,9])
+print(np.argsort(arr1))
+print("\n sort() - returns the sorted array")
+print(np.sort(arr1))
+
+# mean - calculate the mean of gievn array elements
+# average - computes the weighted average along the specified axis. 
+print("\n np.mean : ", np.mean(arr1))
+print("\n np.average : ", np.average(arr1))
+
+fre = np.count_nonzero(arr == 5)
+print("\n Frequency of value 5:", fre)
+
+arr3 = np.array(['ab', 'cdef', 'ghi'])
+result = np.char.join('*', arr3)
+print("\n Array with * between characters:")
+print(result)
+
+
