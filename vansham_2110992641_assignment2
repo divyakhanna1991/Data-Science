@@ -4,27 +4,34 @@ b) Generate pie chart based upon the entered data
 c) Generate bar chart based upon the entered data '''
 
 import matplotlib.pyplot as plt
-listX =[]
-listY =[]
-n = int(input("Enter number of values you want to enter"))
-print("Enter x and y : ")
+
+# Initialize empty lists to store data points
+listX = []
+listY = []
+
+# Prompt user to enter the number of data points
+n = int(input("Enter the number of values you want to enter: "))
+
+print("Enter x and y values: ")
+# Loop to input x and y values from user
 for i in range(n):
-   x = int(input("X: "))
-   y = int(input("Y: "))
-   listX.append(x)
-   listY.append(y)
+    x = int(input("X: "))  # Input x value
+    y = int(input("Y: "))  # Input y value
+    listX.append(x)  # Append x value to listX
+    listY.append(y)  # Append y value to listY
 
 # Pie chart
-plt.pie(listY, labels=listX)
-plt.legend(title="Pie chart")
-plt.show()
+plt.pie(listY, labels=listX)  # Create a pie chart with y values and x labels
+plt.legend(title="Pie chart")  # Add legend with title "Pie chart"
+plt.show()  # Display the pie chart
 
 # Bar chart
-plt.bar(listX,listY,width=0.5)
-plt.xlabel('X')
-plt.ylabel('Y')
-plt.title('Bar Chart')
-plt.show()
+plt.bar(listX, listY, width=0.5)  # Create a bar chart with x values, y values, and bar width
+plt.xlabel('X')  # Set x-axis label
+plt.ylabel('Y')  # Set y-axis label
+plt.title('Bar Chart')  # Set chart title
+plt.show()  # Display the bar chart
+
 
 
   '''2. Write python program to imports “sale.csv” file and do the following tasks:
@@ -38,30 +45,38 @@ f) Mention xlabel, ylabel and title to the plot'''
 
 import pandas as pd
 import matplotlib.pyplot as plt
+
+# Read the CSV file into a DataFrame
 df = pd.read_csv("sales.csv")
-print("TOP 10 DATA ")
+
+# Displaying top 10 rows of the dataframe
+print("TOP 10 DATA:")
 print(df.head(10))
 
-print("\nBOTTOM 10 DATA ")
+# Displaying bottom 10 rows of the dataframe
+print("\nBOTTOM 10 DATA:")
 print(df.tail(10))
 
+# Calculating the total sales by summing up the 'Units Sold' column
+total_sales = df['Units Sold'].sum()
+print("\nTOTAL SALES:", total_sales)
 
-total = df['Units Sold'].sum()
-print("\n TOTAL SALES : ",total)
+# Calculating the mean sales
+mean_sales = df['Units Sold'].mean()
+print("\nMEAN SALES:", mean_sales)
 
-mean = df['Units Sold'].mean()
-print("\n MEAN SALES : ",mean)
+# Grouping the sales by 'Product' and summing up the 'Units Sold' for each product category
+grouped_sales = df.groupby('Product')['Units Sold'].sum()
+print("\nGROUPING THE SALES BY CATEGORY:")
+print(grouped_sales)
 
-group = df.groupby('Product')['Units Sold'].sum()
-print("GROUPING THE SALES BY CATEGORY")
-print(group)
+# Plotting the sales product-wise as a bar chart
+grouped_sales.plot(kind='bar')  # Plotting as a bar chart
+plt.xlabel("Products")  # Labeling x-axis
+plt.ylabel("Sales")  # Labeling y-axis
+plt.title("Sales Product wise")  # Setting the title
+plt.show()  # Displaying the plot
 
-print("\n PLOTTING THE SALES PRODUCT-WISE")
-group.plot(kind = 'bar')
-plt.xlabel("Products")
-plt.ylabel("Sales")
-plt.title("Sales Product wise")
-plt.show()
 
 
   ''' 3.How are NumPy arrays better than Python’s lists? Do the following task:
@@ -74,43 +89,53 @@ f) count the frequency of a given positive value appearing in the NumPy array
 
 g) inserting * between characters of all elements in a NumPy array. '''
 
-
 import numpy as np
 
-print(''' Numpy arrays are different from Python's list
-1. as they execute faster in comparsion
-2. Array is collection of homogeneous data while list can contain heterogeneous data
-3. Array is stored in contingous memory location while list is stored in non-contiguous memory locations.\n''')
+# Printing the differences between NumPy arrays and Python lists
+print('''Numpy arrays are different from Python's list:
+1. They execute faster in comparison.
+2. Arrays are collections of homogeneous data, while lists can contain heterogeneous data.
+3. Arrays are stored in contiguous memory locations, while lists are stored in non-contiguous memory locations.\n''')
 
-arr = np.array([[1,5,6],[5,12,15],[4,13,9]])
-arr2 = np.array([[3],[5],[14]])
-result = np.hstack((arr,arr2))
-print("Adding column")
+# Creating NumPy arrays
+arr = np.array([[1, 5, 6], [5, 12, 15], [4, 13, 9]])
+arr2 = np.array([[3], [5], [14]])
+
+# Adding a column to the array
+result = np.hstack((arr, arr2))
+print("Adding column:")
 print(result)
 
-print("\narr[:,0] - selects entire first column as 1D array")
-print(arr[:,0])
-print("\narr[:,[0]] - selects entire first column as a 2D array")
-print(arr[:,[0]])
+# Selecting entire first column as a 1D array
+print("\narr[:,0] - selects entire first column as 1D array:")
+print(arr[:, 0])
 
-axisMax = np.argmax(arr)
-print("Axis of max element : ", axisMax)
+# Selecting entire first column as a 2D array
+print("\narr[:,[0]] - selects entire first column as a 2D array:")
+print(arr[:, [0]])
 
-print("\n agrsort() - returns the indices that would sort an array")
-arr1 = np.array([4,7,1,3,9])
+# Finding the index of the maximum element in the array
+axis_max = np.argmax(arr)
+print("Axis of max element:", axis_max)
+
+# Sorting the array using argsort() and sort()
+print("\nargsort() - returns the indices that would sort an array:")
+arr1 = np.array([4, 7, 1, 3, 9])
 print(np.argsort(arr1))
-print("\n sort() - returns the sorted array")
+print("\nsort() - returns the sorted array:")
 print(np.sort(arr1))
 
-# mean - calculate the mean of gievn array elements
-# average - computes the weighted average along the specified axis. 
-print("\n np.mean : ", np.mean(arr1))
-print("\n np.average : ", np.average(arr1))
+# Calculating mean and average of the array
+print("\nnp.mean:", np.mean(arr1))
+print("\nnp.average:", np.average(arr1))
 
+# Counting the frequency of a specific value in the array
 fre = np.count_nonzero(arr == 5)
-print("\n Frequency of value 5:", fre)
+print("\nFrequency of value 5:", fre)
 
+# Inserting '*' between characters of all elements in a NumPy array
 arr3 = np.array(['ab', 'cdef', 'ghi'])
 result = np.char.join('*', arr3)
-print("\n Array with * between characters:")
+print("\nArray with * between characters:")
 print(result)
+
