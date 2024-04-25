@@ -1,0 +1,95 @@
+question 1 - # Draw scatter plot 
+# we have data on yield, and rainfall for different crops in a region
+# Write a python program to import crop.csv file and perform the following task. 
+# b) Draw histogram to visualize distribution of customer ages
+# c) Draw line plot to visualize the trend in crop yield for each crop
+
+code - import pandas as pd
+import matplotlib.pyplot as plt
+
+data = pd.read_csv("C:\\Users\\shruti\\Downloads\\crop.csv")
+
+plt.figure(figsize=(8, 6))
+plt.plot(data['rainfall'], data['yield'], marker='o', linestyle='-')
+plt.title('Line Plot: Yield vs. Rainfall')
+plt.grid(True)
+plt.show()
+
+
+df = pd.read_csv("C:\Users\shruti\Downloads\crop_.csv")
+plt.hist(df['Age'], bins = 10, color = "skyblue", edgecolor = "black")
+plt.xlabel('Age')
+plt.ylabel('Frequency')
+plt.legend()
+plt.show()
+
+
+ c) Draw line plot to visualize the trend in crop yield for each crop
+ plt.figure(figsize=(12, 8))
+ for crop, crop_data in data.groupby('Crop'):
+     plt.plot(crop_data['Year'], crop_data['Yield'], label=crop, marker='o')
+ plt.title('Trend in Crop Yield for Each Crop')
+ plt.xlabel('Year')
+ plt.ylabel('Yield')
+ plt.legend()
+ plt.grid(True)
+ plt.show()
+
+
+
+Q2) Write python program to generate to do list which performs the following taksk
+# 1) to display the menu
+# 2) adding task
+# 3) viewing task
+# 4) deleting task
+
+
+code - todo_dict = {}
+
+def enter_task():
+    task = input("Enter the task: ")
+    todo_dict[len(todo_dict) + 1] = task
+
+def delete_task():
+    display_tasks()
+    position = int(input("Enter the position of the task you want to delete: "))
+    if position in todo_dict:
+        del todo_dict[position]
+    else:
+        print("Task not found at position", pos)
+
+def update_task():
+    display_tasks()
+    position = int(input("Enter the position of the task you want to update/add: "))
+    task = input("Enter the updated task: ")
+    todo_dict[position] = task
+
+def display_tasks():
+    if todo_dict:
+        print("Printing the to-do list:")
+        for key, value in todo_dict.items():
+            print(f"{key} task is {value}")
+    else:
+        print("To-do list is empty.")
+
+while True:
+    print("1. Enter a task")
+    print("2. Delete a task")
+    print("3. Update a task")
+    print("4. Display tasks")
+    print("5. Exit")
+    choice = input("Enter your choice: ")
+
+    if choice == '1':
+        enter_task()
+    elif choice == '2':
+        delete_task()
+    elif choice == '3':
+        update_task()
+    elif choice == '4':
+        display_tasks()
+    elif choice == '5':
+        print("Exiting the program.")
+        break
+    else:
+        print("Invalid choice. Please try again.")
