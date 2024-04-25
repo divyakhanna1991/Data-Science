@@ -1,0 +1,89 @@
+Ques1- Write a Python program to import "crop.csv" and do the following task-
+1.) Draw scatter plot- We have data on the yield and rainfall for different crops in  regions)
+2.) Draw a histogram to visualize the distribution of crop ages.
+3.) Draw a line plot to visualize the trend in crop yield for each crop.
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+data = pd.read_csv('crop.csv')
+
+plt.scatter(data['Rainfall'], data['Yield'], alpha=0.5)
+plt.title('Yield vs Rainfall for Different Crops')
+plt.xlabel('Rainfall')
+plt.ylabel('Yield')
+plt.grid(True)
+plt.show()
+
+plt.hist(data['Customer Age'], color='skyblue', edgecolor='black')
+plt.title('Distribution(Frequency)of Customer Ages')
+plt.xlabel('Age')
+plt.ylabel('Frequency')
+plt.grid(True)
+plt.show()
+
+for crop in data['Crop'].unique():
+    crop_sub= data[data['Crop'] == crop]
+    plt.plot(crop_sub['Year'], crop_sub['Yield'], label=crop)
+plt.title('Trend in Crop Yield')
+plt.xlabel('Year')
+plt.ylabel('Yield')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+'''---------------------------------------------------------------------------------------------------------------------------------------------------------------------'''
+Ques2-Write a Python program to generate a to-do-list that performs the following tasks-
+1.) Display a menu
+2.) Adding task
+3.) Viewing task
+4.) Delete task
+
+class ToDoList:
+    def __init__(self):
+        self.tasks = []
+
+    def display_menu(self):
+        print("1. Add Task")
+        print("2. View Tasks")
+        print("3. Delete Task")
+        print("4. Exit")
+
+    def add_task(self, task):
+        self.tasks.append(task)
+        print("Task added successfully.")
+
+    def view_tasks(self):
+        if not self.tasks:
+            print("No tasks available.")
+        else:
+            print("Tasks:")
+            for index, task in enumerate(self.tasks, start=1):
+                print(f"{index}. {task}")
+
+    def delete_task(self, index):
+        if index < 1 or index > len(self.tasks):
+            print("Invalid task index.")
+        else:
+            del self.tasks[index - 1]
+            print("Task deleted successfully.")
+
+to_do_list = ToDoList()
+
+while True:
+    to_do_list.display_menu()
+    choice = input("Enter your choice: ")
+
+    if choice == '1':
+        task = input("Enter task: ")
+        to_do_list.add_task(task)
+    elif choice == '2':
+        to_do_list.view_tasks()
+    elif choice == '3':
+        index = int(input("Enter task index to delete: "))
+        to_do_list.delete_task(index)
+    elif choice == '4':
+        print("Exiting program...")
+        break
+    else:
+        print("Invalid choice. Please try again.")
