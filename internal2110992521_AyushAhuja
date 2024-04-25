@@ -1,0 +1,88 @@
+#answer 1
+import pandas as pd
+import matplotlib.pyplot as plt
+data=pd.read_csv("/content/drive/MyDrive/Dataset/yield_df.csv")
+# Task 1: Draw scatter plot for yield and rainfall
+plt.scatter(data['rainfall'], data['yield'])
+plt.title('Yield and Rainfall for Different Crops')
+plt.xlabel('Rainfall')
+plt.ylabel('Yield')
+plt.grid(True)
+plt.show()
+# Task 2: Draw histogram to visualize the distribution of customer ages
+plt.hist(data['customer_age'])
+plt.title('Distribution of Customer Ages')
+plt.xlabel('Age')
+plt.ylabel('Frequency')
+plt.grid(True)
+plt.show()
+
+# Task 3: Draw line plot to visualize trend in crop yield for each crop
+for crop in data['Crop'].unique():
+    crop_subset = data[data['Crop'] == crop]
+    plt.plot(crop_subset['Year'], crop_subset['yield'], label=crop)
+
+plt.title('Trend in Crop Yield')
+plt.xlabel('Year')
+plt.ylabel('Yield')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+#answer 2
+class ToDoList:
+    def __init__(self):
+        self.tasks = []
+
+    def display_menu(self):
+        print("\n--- To-Do List Menu ---")
+        print("1. Add Task")
+        print("2. View Tasks")
+        print("3. Delete Task")
+        print("4. Exit")
+
+    def add_task(self, task):
+        self.tasks.append(task)
+        print("Task added successfully!")
+
+    def view_tasks(self):
+        if not self.tasks:
+            print("No tasks in the list.")
+        else:
+            print("\n--- Your Tasks ---")
+            for index, task in enumerate(self.tasks, start=1):
+                print(f"{index}. {task}")
+
+    def delete_task(self, index):
+        try:
+            del self.tasks[index - 1]
+            print("Task deleted successfully!")
+        except IndexError:
+            print("Invalid task index!")
+
+def main():
+    todo_list = ToDoList()
+
+    while True:
+        todo_list.display_menu()
+        choice = input("Enter your choice (1-4): ")
+
+        if choice == '1':
+            task = input("Enter the task: ")
+            todo_list.add_task(task)
+        elif choice == '2':
+            todo_list.view_tasks()
+        elif choice == '3':
+            if not todo_list.tasks:
+                print("No tasks to delete.")
+            else:
+                index = int(input("Enter the index of the task to delete: "))
+                todo_list.delete_task(index)
+        elif choice == '4':
+            print("Exiting program.")
+            break
+        else:
+            print("Invalid choice. Please enter a number from 1 to 4.")
+
+if __name__ == "__main__":
+    main()
