@@ -1,0 +1,82 @@
+Ques 1. Write python program to import crop.csv file and do the following task
+1. Draw a scatter plot. We have data on the yield and rainfall for different crops in a region
+2. Draw histogram to visulaize distribution of customer ages
+3. Draw line plot to visualize trend in crop yield for each crop
+
+
+Ques 2. Write python program to generate todo list which perform the following
+1. display a menu
+2. adding task
+3. viewing task
+4. Deleting task
+
+'''
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+df = pd.read_csv("crop.csv")
+x = df["Annual_Rainfall"]
+y = df["Yield"]
+plt.scatter(x,y)
+plt.show()
+
+a = df["age"]
+plt.hist(a)
+plt.xlabel("Age")
+plt.ylabel("Frequency")
+plt.show()
+
+
+b = df.groupby("Crop")["Yield"].sum().round(3)
+plt.plot(b)
+plt.xlabel("Crops")
+plt.ylabel("Yield")
+plt.show()
+
+
+import numpy as np
+
+l1 = np.array([])
+
+while True:
+    print("\nTodo List Menu:")
+    print("1. Add Task")
+    print("2. View Tasks")
+    print("3. Delete Task")
+    print("4. Exit")
+    choice = int(input("Enter your choice: "))
+
+    if choice == 1:
+        t = input("Task to enter: ")
+        l1 = np.append(l1, t)
+        print("Task added successfully!")
+
+    elif choice == 2:
+        if l1.size == 0:
+            print("No tasks in the list.")
+        else:
+            print("Tasks:")
+            for i in range(len(l1)):
+                print(f"{i+1}. {l1[i]}")
+
+    elif choice == 3:
+        if l1.size == 0:
+            print("No tasks to delete.")
+        else:
+            print("Tasks:")
+            for i in range(len(l1)):
+                print(f"{i+1}. {l1[i]}")
+            index = int(input("Enter index to delete: "))
+            if 1 <= index <= len(l1):
+                l1 = np.delete(l1, index - 1)
+                print("Task deleted successfully!")
+            else:
+                print("Invalid index.")
+
+    elif choice == 4:
+        print("EXIT")
+        break
+    else:
+        print("Invalid choice. Please choose again.")
+
