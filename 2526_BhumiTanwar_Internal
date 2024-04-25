@@ -1,0 +1,86 @@
+'''
+
+Ques- Write a Python program to import "crop.csv" and do the following task-
+1.) Draw scatter plot- We have data on the yield and rainfall for different crops in  regions)
+2.) Draw a histogram to visualize the distribution of crop ages.
+3.) Draw a line plot to visualize the trend in crop yield for each crop.
+
+'''
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('crop2.csv')
+
+plt.scatter(df['Rainfall'], df['Yield'],color='red',marker='o',s=10)
+plt.xlabel('Rainfall')
+plt.ylabel('Yield')
+plt.title('Visualizing rainfall and yield throught scatter plot  ')
+plt.show()
+
+plt.hist(df['Age'],color='green')
+plt.xlabel('Age')
+plt.ylabel('Frequency')
+plt.title('Visualizing distribution of crop ages using histogram')
+plt.show()
+
+for crop, crop_df in df.groupby('Crop'):
+    plt.plot(crop_df['Year'], crop_df['Yield'], label=crop,marker='o')
+plt.xlabel('Year')
+plt.ylabel('Yield')
+plt.title('Visualizing Trend in Crop Yield Over Time using line plot')
+plt.legend()
+plt.show()
+
+
+'''
+Ques-Write a Python program to generate a to-do-list that performs the following tasks-
+1.) Display a menu
+2.) Adding task
+3.) Viewing task
+4.) Delete task
+
+'''
+
+import matplotlib.pyplot as plt
+import pandas as pd
+def menu():
+    print("1. Display a menu")
+    print("2. Add a task")
+    print("3. Viewing All tasks")
+    print("4. Deleting a task")
+def add():
+    item=input("Enter item to add to to-do-list: ")
+    works.append(item)
+    print("Your task has been added successfully!!")
+def view():
+    print("All tasks are: ")
+    task_number = 1
+    for task in works:
+        print(f"Task {task_number} is {task}")
+        task_number += 1
+def delete():
+    location = int(input("Enter task number to delete a task: "))
+    if 1 <= location <= len(works):
+        works.pop(location - 1)
+        print("Task has been deleted successfully")
+    else:
+        print("Invalid task number. Please enter a valid task number.")
+
+menu()
+works=[]
+while(True):
+    choice=int(input("Enter choice: "))
+    if(choice==1):
+        menu()
+    elif(choice==2):
+        add()
+    elif(choice==3):
+        view()
+    elif(choice==4):
+        delete()
+    
+
+
+
+
+
