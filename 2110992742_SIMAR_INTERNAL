@@ -1,0 +1,97 @@
+# Q1) we have data on yield, and rainfall for different crops in a region
+# Write a python program to import crop.csv file and perform the following task. 
+# a) Draw scatter plot
+# b) Draw histogram to visualize distribution of customer ages
+# c) Draw line plot to visualize the trend in crop yield for each crop
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data = pd.read_csv("C:\\Users\\aryan\\Downloads\\crop.csv")
+
+plt.figure(figsize=(8, 6))
+plt.plot(data['rainfall'], data['yield'], marker='o', linestyle='-')
+plt.title('Line Plot: Yield vs. Rainfall')
+plt.grid(True)
+plt.show()
+
+
+df = pd.read_csv("C:\Users\aryan\Downloads\crop_.csv")
+plt.hist(df['Age'], bins = 10, color = "skyblue", edgecolor = "black")
+plt.xlabel('Age')
+plt.ylabel('Frequency')
+plt.legend()
+plt.show()
+
+
+ plt.figure(figsize=(12, 8))
+for crop, crop_data in data.groupby('Crop'):
+   plt.plot(crop_data['Year'], crop_data['Yield'], label=crop, marker='o')
+plt.title('Trend in Crop Yield for Each Crop')
+ plt.xlabel('Year')
+plt.ylabel('Yield')
+plt.legend()
+ plt.grid(True)
+ plt.show()
+
+# Q2) Write python program to generate to do list which performs the following taksk
+# 1) to display the menu
+# 2) adding task
+# 3) viewing task
+# 4) deleting task
+
+choice = True
+print("This is the todo list:")
+todo_dictionary = {}
+count = 1
+def enter_function():
+  global count
+  entering = True
+  
+  while(entering == True):
+    task = input("enter the task: ")
+    todo_dictionary[count] = task
+    count = count+ 1
+    todo_choice = int(input("press 1 to enter more else press any number: "))
+    if(todo_choice != 1):
+        break
+    
+     
+def delete_function():
+  display()
+  pos = int(input("enter the position you want to delete: "))
+  todo_dictionary.pop(pos)
+def update_function():
+  display()
+  pos = int(input("enter the position you want to update(if position is not avilable then it will be added): "))
+  element = input("what you want to update/add: ")
+  todo_dictionary.update({pos: element})
+def display():
+  print("printting the dictionary: ")
+  for key, value in todo_dictionary.items():
+     print("{} task is {}".format(key,value))
+     
+# print("1 do you want to enter the task: ")
+enter_function()
+
+while(choice == True):
+  print("1 do you want to delete the task: ")
+  print("2 do you want to update the task: ")
+  print("3 do you want to display the task: ")
+  number_cho = int(input("enter you choice:"))
+  if(number_cho == 1):
+      delete_function()
+  elif(number_cho == 2):
+      update_function()
+  elif(number_cho == 3):
+      display()
+  else:
+      print("enter the valid number") 
+      continue
+  
+  n = int(input("enter 0 to continue else prss any number: "))
+  if(n == 0):
+    continue
+  else:break
+
+
