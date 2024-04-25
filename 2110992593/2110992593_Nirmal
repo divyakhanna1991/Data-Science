@@ -1,0 +1,118 @@
+Q1  write python program to crop . csv file and do the following task
+# 1)draw scattered plot we have data on yield and rainfall for diff crops in a reason
+# 2)draw histogram to visualized distribution of customer age
+# 3)draw line plot to visualized the  trend in crop yield for each crop
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+def scatter_plot_yield_rainfall(data):
+    plt.figure(figsize=(10, 6))
+    crops = data['Crop'].unique()
+    colors = plt.cm.get_cmap('tab10', len(crops))
+    for i, crop in enumerate(crops):
+        crop_data = data[data['Crop'] == crop]
+        plt.scatter(crop_data['Rainfall'], crop_data['Yield'], label=crop, color=colors(i))
+    plt.title('Yield vs Rainfall for Different Crops')
+    plt.xlabel('Rainfall')
+    plt.ylabel('Yield')
+    plt.legend()
+    plt.show()
+
+
+def histogram_customer_age(data):
+    plt.figure(figsize=(10, 6))
+    plt.hist(data['Customer Age'], bins=20, edgecolor='black')
+    plt.title('Distribution of Customer Ages')
+    plt.xlabel('Age')
+    plt.ylabel('Count')
+    plt.show()
+
+
+def line_plot_yield_trend(data):
+    plt.figure(figsize=(10, 6))
+    crops = data['Crop'].unique()
+    colors = plt.cm.get_cmap('tab10', len(crops)) 
+    for i, crop in enumerate(crops):
+        crop_data = data[data['Crop'] == crop]
+        plt.plot(crop_data['Year'], crop_data['Yield'], label=crop, color=colors(i))
+    plt.title('Crop Yield Trend Over Years')
+    plt.xlabel('Year')
+    plt.ylabel('Yield')
+    plt.legend()
+    plt.show()
+
+
+file_path = 'crop_data.csv'  
+df = pd.read_csv(file_path)
+
+
+scatter_plot_yield_rainfall(df)
+
+histogram_customer_age(df)
+
+line_plot_yield_trend(df)
+
+ Q2  write python program to generate to do list which perform the following task
+# display the menu
+# adding task
+# viewing task
+# delete task
+
+def display_menu():
+    print("To-Do List Menu")
+    print("1. Add Task")
+    print("2. View Tasks")
+    print("3. Delete Task")
+    print("4. Exit")
+
+
+def add_task(todo_list):
+    task = input("Enter the task to add: ")
+    todo_list.append(task)
+    print("Task added successfully!")
+
+def view_tasks(todo_list):
+    if not todo_list:
+        print("No tasks in list.")
+    else:
+        print("Tasks in To-Do List")
+        for index, task in enumerate(todo_list, start=1):
+            print(f"{index}. {task}")
+
+def delete_task(todo_list):
+    view_tasks(todo_list) 
+    if not todo_list:
+        return 
+
+    try:
+        task_index = int(input("Enter the task number to delete: "))
+        if 1 <= task_index <= len(todo_list):
+            deleted_task = todo_list.pop(task_index - 1)
+            print(f"Task '{deleted_task}' deleted successfully!")
+        else:
+            print("Invalid task number.")
+    except ValueError:
+        print("Invalid input.")
+
+
+todo_list = []
+
+
+while True:
+    display_menu()
+    choice = input("Enter your choice (1-4): ")
+
+    if choice == '1':
+        add_task(todo_list)
+    elif choice == '2':
+        view_tasks(todo_list)
+    elif choice == '3':
+        delete_task(todo_list)
+    elif choice == '4':
+        print("Exiting")
+        break
+    else:
+        print("Invalid choice.")
