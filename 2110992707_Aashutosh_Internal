@@ -1,0 +1,106 @@
+# Q1) we have data on yield, and rainfall for different crops in a region
+# Write a python program to import crop.csv file and perform the following task. 
+# a) Draw scatter plot
+# b) Draw histogram to visualize distribution of customer ages
+# c) Draw line plot to visualize the trend in crop yield for each crop
+
+import pandas as pd
+import matplotlib.pyplot as plt
+data = pd.read_csv("E:\\AASHUTOSH\\Data Science (College)\\Github Project\\crop.csv")
+
+plt.figure(figsize=(8, 6))
+plt.plot(data['Rainfall'], data['Crop Yield'], marker='o', linestyle='-')
+plt.title('Line Plot: Yield vs. Rainfall')
+plt.grid(True)
+plt.show()
+
+
+df = pd.read_csv("E:\\AASHUTOSH\\Data Science (College)\\Github Project\\crop.csv")
+plt.hist(df['Age'], bins = 10, color = "skyblue", edgecolor = "black")
+plt.xlabel('Age')
+plt.ylabel('Frequency')
+plt.legend()
+plt.show()
+
+
+plt.figure(figsize=(12, 8))
+for crop, crop_data in data.groupby('Crop'):
+   plt.plot(crop_data['Year'], crop_data['Crop Yield'], label=crop, marker='o')
+plt.title('Trend in Crop Yield for Each Crop')
+plt.xlabel('Year')
+plt.ylabel('Yield')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+
+
+# Q2) Write python program to generate to do list which performs the following taksk
+# 1) to display the menu
+# 2) adding task
+# 3) viewing task
+# 4) deleting task
+
+print("Git hub project 1")
+print("TO-DO LIST")
+print("Press 1 for adding the task")
+print("Press 2 for displaying the tasks")
+print("Press 3 for viewing the task")
+print("Press 4 for deleting the task")
+print("Press 5 for exiting the program")
+li= []
+while(True):
+    ch1 = (int)(input("Enter your choice: "))
+    if(ch1 == 1):
+        a = (int)(input("Enter the number of tasks you want to add: "))
+        for i in range(0, a, 1):
+            t1 = input(f"Enter task {i}: ")
+            li.append(t1)
+            # print(li)     # this is used when you want to show the tasks while you are adding
+        print("Tasks added successfully!\n")
+        print("Press 1 for adding the task")
+        print("Press 2 for displaying the menu")
+        print("Press 3 for viewing the task")
+        print("Press 4 for deleting the task")
+        print("Press 5 for exiting the program")
+          
+    elif(ch1 == 2):
+        if(len(li) == 0):
+            print("You need to add something!\n Your list is empty!")
+        else:
+            print("Your tasks are")
+            print(li, "\n")
+            print("Press 1 for adding the task")
+            print("Press 2 for displaying the menu")
+            print("Press 3 for viewing the task")
+            print("Press 4 for deleting the task")
+            print("Press 5 for exiting the program")
+
+    elif(ch1 == 3):
+        if(len(li) == 0):
+            print("You need to add something! Your list is empty!\n")
+        else:
+            vtask = (int)(input("Enter the index of the task you want to view: "))
+            print(f"Task {vtask} is: ")
+            print(li[vtask], "\n")  
+            print("Press 1 for adding the task")
+            print("Press 2 for displaying the menu")
+            print("Press 3 for viewing the task")
+            print("Press 4 for deleting the task")
+            print("Press 5 for exiting the program")
+
+    elif(ch1 == 4):
+        if(len(li) == 0):
+            print("You need to add something! Your list is empty!")
+        else:
+            dtask = (int)(input("Enter the index of the item you want to deleting: "))
+            li.pop(dtask)
+            print("Task deleted successfully!\n")
+            print("Press 1 for adding the task")
+            print("Press 2 for displaying the menu")
+            print("Press 3 for viewing the task")
+            print("Press 4 for deleting the task")
+            print("Press 5 for exiting the program")
+    else:
+        print("Thank you for using the to-do list! There are only 4 options!\n")
+        break
