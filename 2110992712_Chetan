@@ -1,0 +1,78 @@
+#question 1 code
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+#a) yield and rainfall data
+df = pd.read_csv("cropdata.csv")
+# plt.scatter(df['Rainfall'], df['Yield'])
+# plt.title('Yield and Rainfall')
+# plt.xlabel('rainfall data')
+# plt.ylabel('yield data')
+# plt.show()
+
+#b)histogram to visualize the distribution of customer ages
+# plt.hist(df['Rainfall'],edgecolor='black')
+# plt.title('distribution of Customer Ages')
+# plt.xlabel('ages')
+# plt.ylabel('Frequency')
+# plt.show()
+
+
+#c)Draw line plot to visualize the trend in crop yield for each crop
+# Line Plot: Trend in Crop Yield for Each Crop
+x = df['Year']
+y = df['Yield']
+df.groupby('Crop').plot(x, y, title='Trend in Crop Yield')
+# plt.xlabel('year')
+# plt.ylabel('yield')
+plt.show()
+
+
+#question 2 code
+
+todolist = []
+
+def show():
+    print("Todo List Menu:")
+    print("1. Add a New Task")
+    print("2. View All Tasks")
+    print("3. Delete a Task")
+    print("4. Exit")
+
+def add():
+    task = input("Enter the task you want to add: ")
+    todolist.append(task)
+
+def view():
+    if todolist:
+        print("Your Tasks:")
+        for i in range(len(todolist)):
+            print(f"{i+1}. {todolist[i]}")
+    else:
+        print("No tasks.")
+
+def delete():
+    pos = int(input("Enter the position you want to delete: "))
+    if 0 <= pos < len(todolist):
+        todolist.pop(pos)
+        print("Task deleted successfully.")
+    else:
+        print("Invalid position")
+
+while True:
+    show()
+    choice = input("Enter your choice: ")
+    if choice == "1":
+        add()
+    elif choice == "2":
+        view()
+    elif choice == "3":
+        delete()
+    elif choice == "4":
+        print("Exit")
+        break
+    else:print("Invalid choice")
+
+
+
