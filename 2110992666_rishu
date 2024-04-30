@@ -1,0 +1,94 @@
+question 1
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+crop_data = pd.read_csv('crop.csv')
+plt.figure(figsize=(10, 6))
+plt.scatter(crop_data['rainfall'], crop_data['yield'], c='green')
+plt.xlabel('Rainfall')
+plt.ylabel('Yield')
+plt.title(' Yield vs Rainfall')
+plt.show()
+
+# Task b) Draw a histogram: distribution of customer ages
+plt.figure(figsize=(10, 6))
+plt.hist(crop_data['age'], color='orange')
+plt.xlabel('Age')
+plt.ylabel('Frequency')
+plt.title(' Distribution of Customer Ages')
+plt.show()
+
+# Task c) Draw a line plot: trend in crop yield for each crop
+# We group the data by 'crop' and calculate the mean yield for each year
+
+crop_group = crop_data.groupby(['year', 'crop'])['yield'].mean().reset_index()
+plt.figure(figsize=(10, 6))
+for crop in crop_group['crop'].unique():
+    crop_subset = crop_group[crop_group['crop'] == crop]
+    plt.plot(crop_subset['year'], crop_subset['yield'], label=crop)
+plt.xlabel('Year')
+plt.ylabel('Mean Yield (tons/ha)')
+plt.title('Trend in Crop Yield for Each Crop')
+plt.legend()
+plt.show()
+
+
+question 2
+
+def display_menu():
+    print("\nMenu:")
+    print("1. Add a task")
+    print("2. View tasks")
+    print("3. Delete a task")
+    print("4. Exit")
+
+def add_task(todo_list):
+    task = input("Enter the task: ")
+    if task:
+        todo_list.append(task)
+        print(f"Task '{task}' added successfully!")
+    else:
+        print("Task cannot be empty!")
+
+def view_tasks(todo_list):
+    if not todo_list:
+        print("No tasks in the to-do list.")
+    else:
+        print("\nTo-Do List:")
+        for index, task in enumerate(todo_list, start=1):
+            print(f"{index}. {task}")
+
+def delete_task(todo_list):
+    if not todo_list:
+        print("No tasks to delete.")
+        return
+
+    view_tasks(todo_list)
+    try:
+        task_index = int(input("\nEnter the number of the task to delete: "))
+        if 1 <= task_index <= len(todo_list):
+            deleted_task = todo_list.pop(task_index - 1)
+            print(f"Task '{deleted_task}' deleted successfully!")
+        else:
+            print("Invalid task number.")
+    except ValueError:
+        print("Please enter a valid number.")
+
+todo_list = []
+while True:
+    display_menu()
+    choice = input("Enter your choice: ")
+    if choice == "1":
+        add_task(todo_list)
+    elif choice == "2":
+        view_tasks(todo_list)
+    elif choice == "3":
+        delete_task(todo_list)
+    elif choice == "4":
+        print("Exiting the to-do list application.")
+        break
+    else:
+        print("Invalid choice. Please try again.")
+
