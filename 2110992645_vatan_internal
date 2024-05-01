@@ -1,0 +1,76 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load data from CSV file
+data = pd.read_csv('crop.csv')
+
+# Task b) Draw histogram to visualize distribution of customer ages
+plt.hist(data['Age'], bins=10, color='skyblue', edgecolor='black')
+plt.xlabel('Age')
+plt.ylabel('Frequency')
+plt.title('Distribution of Customer Ages')
+plt.show()
+
+# Task c) Draw line plot to visualize the trend in crop yield for each crop
+plt.figure(figsize=(10, 6))
+for crop in data['Crop'].unique():
+    crop_data = data[data['Crop'] == crop]
+    plt.plot(crop_data['Year'], crop_data['Yield'], label=crop)
+
+plt.xlabel('Year')
+plt.ylabel('Yield')
+plt.title('Trend in Crop Yield')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# Q2) To-do list program
+class ToDoList:
+    def __init__(self):
+        self.tasks = []
+
+    def display_menu(self):
+        print("To-Do List Menu")
+        print("1. Add Task")
+        print("2. View Tasks")
+        print("3. Delete Task")
+        print("4. Exit")
+
+    def add_task(self, task):
+        self.tasks.append(task)
+        print("Task added successfully!")
+
+    def view_tasks(self):
+        if not self.tasks:
+            print("No tasks available.")
+        else:
+            print("Tasks:")
+            for i, task in enumerate(self.tasks, 1):
+                print(f"{i}. {task}")
+
+    def delete_task(self, task_index):
+        if task_index < 1 or task_index > len(self.tasks):
+            print("Invalid task number.")
+        else:
+            del self.tasks[task_index - 1]
+            print("Task deleted successfully!")
+
+# Example usage of ToDoList class
+todo_list = ToDoList()
+while True:
+    todo_list.display_menu()
+    choice = input("Enter your choice: ")
+    
+    if choice == '1':
+        task = input("Enter the task: ")
+        todo_list.add_task(task)
+    elif choice == '2':
+        todo_list.view_tasks()
+    elif choice == '3':
+        task_index = int(input("Enter the task number to delete: "))
+        todo_list.delete_task(task_index)
+    elif choice == '4':
+        print("Exiting...")
+        break
+    else:
+        print("Invalid choice. Please choose again.")
