@@ -1,0 +1,24 @@
+import pandas as pd
+import numpy as np
+
+data = pd.read_csv("datasience.csv")
+
+print("First few rows of the data:")
+print(data.head())
+
+sample_size = 50 
+sample = data.sample(sample_size)
+
+population_mean = data.mean()
+sample_mean = sample.mean()
+
+print("\nPopulation Mean:")
+print(population_mean)
+
+print("\nSample Mean:")
+print(sample_mean)
+
+if np.isclose(population_mean, sample_mean, atol=0.01).all():
+    print("\nThe selected sample is representing the population.")
+else:
+    print("\nThe selected sample is NOT representing the population.")
