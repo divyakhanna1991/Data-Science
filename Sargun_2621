@@ -1,0 +1,7 @@
+import pandas as pd
+df = pd.read_csv("california_housing_train.csv")
+print("Mean of data")
+print(df.mean())
+print("Mean of sample space")
+df2 = df.loc[1::2]
+print(df2.mean())
