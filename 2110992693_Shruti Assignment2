@@ -1,0 +1,101 @@
+#1
+
+import matplotlib.pyplot as plt
+data = []
+for i in range(5):
+    value = float(input("Enter value {}: ".format(i+1)))
+    data.append(value)
+
+plt.figure(figsize=(10, 10))
+plt.pie(data, labels=None, autopct='%1.1f%%')
+plt.title('Pie Chart')
+plt.show()
+
+plt.figure(figsize=(10, 10))
+plt.bar(range(len(data)), data)
+plt.title('Bar Chart')
+plt.xlabel('Index')
+plt.ylabel('Value')
+plt.show()
+
+#2
+
+import matplotlib.pyplot as plt
+import pandas as pd
+df = pd.read_csv('sales2.csv')
+
+# a) Data Analysis with Pandas by displaying top and bottom 10 rows
+print("Top 10 Rows:")
+print(df.head(10))
+print("\nBottom 10 Rows:")
+print(df.tail(10))
+
+# b) Calculate total sales by adding the data values mentioned in Sales attribute in the file
+total_sales = df['Sales'].sum()
+print("\nTotal Sales: ", total_sales)
+
+# c) Find the mean Sales
+mean_sales = df['Sales'].mean()
+print("\nMean Sales: ", mean_sales)
+
+
+# d) Group the Sales by Category
+grouped = df.groupby('Category')['Sales'].sum()
+print("\nSales by Category:")
+print(grouped)
+
+# e) Plot the Sales Product-wise
+df.plot(kind='bar', x='Product', y='Sales')
+
+# f) Mention xlabel, ylabel, and title to the plot
+plt.xlabel('Product')
+plt.ylabel('Sales')
+plt.title('Sales Product-wise')
+plt.show()
+
+#3
+
+import numpy as np
+array = np.array([[1, 2], [3, 4]])
+
+# a) Insert column in the 2D array
+array = np.insert(array, 1, [[5], [6]], axis=1)
+print("Array After Inserting Column:")
+print(array)
+
+# b) Difference between array1[:,0] and array2[:,[0]]
+array1 = np.array([[1, 2], [3, 4]])
+array2 = np.array([[1, 2], [3, 4]])
+print("\narray1[:,0]:", array1[:,0])
+print("array2[:,[0]]:", array2[:,[0]])
+
+# c) Use argmax() function to get axis of maximum element of the array
+array = np.array([[1, 2], [3, 4]])
+axis = np.argmax(array)
+print("\nAxis of Maximum Element: ", axis)
+
+# d) Showcase the difference between argsort() and sort()
+array = np.array([3, 1, 4, 2])
+indices = np.argsort(array)
+sorted_array = array[indices]
+print("\nSorted Array:")
+print(sorted_array)
+
+# e) Difference between np.mean() and np.average() in NumPy
+array = np.array([1, 2, 3, 4])
+mean = np.mean(array)
+average = np.average(array)
+print("\nMean: ", mean)
+print("Average: ", average)
+
+# f) Count the frequency of a given positive value appearing in the NumPy array
+array = np.array([1, 2, -2, 3, 1, 1])
+value = 2
+count = np.count_nonzero(array == value)
+print("\nFrequency of ", value, ":", count)
+
+# g) Inserting * between characters of all elements in a NumPy array
+array = np.array(['au', 'de', 'qy'])
+with_stars = np.array(['*'.join(item) for item in array])
+print("Inserting * between characters of all elements")
+print(with_stars,'\n')
