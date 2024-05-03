@@ -1,0 +1,29 @@
+import pandas as pd
+
+import numpy as np
+
+
+df = pd.read_csv("data.csv")
+
+
+print("Original DataFrame:")
+
+print(df.head())
+
+sample_size = 50  
+
+sample = df.sample(sample_size)
+
+population_mean = df['total_rooms'].mean()
+
+sample_mean = sample['total_rooms'].mean()
+
+
+if np.isclose(population_mean, sample_mean, atol=0.05):
+
+    print("the selected sample is representative of the population.")
+
+else:
+
+    print("the selected sample is not representative of the population.")
+
