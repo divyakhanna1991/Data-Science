@@ -1,0 +1,26 @@
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv("Covid-19.csv")
+
+df.dropna(inplace=True)
+sample_size = 40 
+sample = df.sample(n=sample_size)
+print("\n1. Selecting random sample from the file")
+print("\nPrinting Random 10 rows\n")
+print(sample)
+
+population_mean = df['Confirmed'].mean()  
+sample_mean = sample['Confirmed'].mean()
+print("\n2. Comparing population mean and sample mean")
+print("Population Mean is:")
+print(population_mean)
+print("\nSample Mean is: ")
+print(sample_mean,'\n')
+
+print("\n3. Displaying result whether sample mean represent the data or not")
+if np.isclose(population_mean, sample_mean):
+    print("The selected sample is representing the population.")
+else:
+    print("The selected sample is not representing the population.")
+
